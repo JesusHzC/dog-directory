@@ -2,6 +2,7 @@ package com.jesushz.dogdirectory
 
 import android.app.Application
 import com.jesushz.dogdirectory.core.di.coreModule
+import com.jesushz.dogdirectory.dog.di.dogModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -20,7 +21,8 @@ class DogDirectoryApp: Application() {
             androidLogger()
             androidContext(this@DogDirectoryApp)
             modules(
-                coreModule
+                coreModule,
+                dogModule
             )
         }
     }
