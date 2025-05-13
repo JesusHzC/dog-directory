@@ -81,5 +81,7 @@ dependencies {
     implementation(libs.ktor.client.logging)
     implementation(libs.ktor.serialization.kotlinx.json)
     implementation(libs.timber)
+    implementation(libs.coil)
+    implementation(libs.coil.network)
 
 }
