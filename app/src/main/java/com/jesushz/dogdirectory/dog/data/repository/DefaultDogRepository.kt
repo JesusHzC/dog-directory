@@ -2,14 +2,10 @@ package com.jesushz.dogdirectory.dog.data.repository
 
 import com.jesushz.dogdirectory.core.domain.DataError
 import com.jesushz.dogdirectory.core.domain.Result
-import com.jesushz.dogdirectory.core.domain.onError
-import com.jesushz.dogdirectory.core.domain.onSuccess
-import com.jesushz.dogdirectory.dog.data.models.Dog
+import com.jesushz.dogdirectory.core.data.models.Dog
 import com.jesushz.dogdirectory.dog.domain.local.LocalDogDataSource
 import com.jesushz.dogdirectory.dog.domain.network.RemoteDogDataSource
 import com.jesushz.dogdirectory.dog.domain.repository.DogRepository
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 
 class DefaultDogRepository(

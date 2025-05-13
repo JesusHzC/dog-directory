@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.jesushz.dogdirectory.core.domain.onError
 import com.jesushz.dogdirectory.core.domain.onSuccess
 import com.jesushz.dogdirectory.core.presentation.ui.asUiText
-import com.jesushz.dogdirectory.dog.data.models.Dog
+import com.jesushz.dogdirectory.core.data.models.Dog
 import com.jesushz.dogdirectory.dog.domain.repository.DogRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel

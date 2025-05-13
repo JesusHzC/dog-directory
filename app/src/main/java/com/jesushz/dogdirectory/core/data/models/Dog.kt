@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalUuidApi::class)
 
-package com.jesushz.dogdirectory.dog.data.models
+package com.jesushz.dogdirectory.core.data.models
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

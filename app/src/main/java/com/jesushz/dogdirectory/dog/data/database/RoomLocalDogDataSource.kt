@@ -6,7 +6,7 @@ import com.jesushz.dogdirectory.core.domain.DataError
 import com.jesushz.dogdirectory.core.domain.Result
 import com.jesushz.dogdirectory.dog.data.mappers.toDog
 import com.jesushz.dogdirectory.dog.data.mappers.toDogEntity
-import com.jesushz.dogdirectory.dog.data.models.Dog
+import com.jesushz.dogdirectory.core.data.models.Dog
 import com.jesushz.dogdirectory.dog.domain.local.LocalDogDataSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

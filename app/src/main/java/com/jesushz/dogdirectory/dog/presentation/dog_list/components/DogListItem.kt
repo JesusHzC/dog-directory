@@ -28,7 +28,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil3.compose.rememberAsyncImagePainter
 import com.jesushz.dogdirectory.R
-import com.jesushz.dogdirectory.dog.data.models.Dog
+import com.jesushz.dogdirectory.core.data.models.Dog
 import timber.log.Timber
 
 @Composable

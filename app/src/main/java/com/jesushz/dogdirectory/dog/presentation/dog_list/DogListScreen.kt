@@ -25,7 +25,7 @@ import com.jesushz.dogdirectory.R
 import com.jesushz.dogdirectory.core.presentation.designsystem.components.DogDirectoryScaffold
 import com.jesushz.dogdirectory.core.presentation.designsystem.theme.DogDirectoryTheme
 import com.jesushz.dogdirectory.core.presentation.ui.ObserveAsEvents
-import com.jesushz.dogdirectory.dog.data.models.Dog
+import com.jesushz.dogdirectory.core.data.models.Dog
 import com.jesushz.dogdirectory.dog.presentation.dog_list.components.DogListItem
 import org.koin.androidx.compose.koinViewModel
 
