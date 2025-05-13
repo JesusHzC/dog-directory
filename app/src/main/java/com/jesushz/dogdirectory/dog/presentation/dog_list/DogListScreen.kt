@@ -1,5 +1,6 @@
 package com.jesushz.dogdirectory.dog.presentation.dog_list
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,6 +24,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.jesushz.dogdirectory.R
 import com.jesushz.dogdirectory.core.presentation.designsystem.components.DogDirectoryScaffold
 import com.jesushz.dogdirectory.core.presentation.designsystem.theme.DogDirectoryTheme
+import com.jesushz.dogdirectory.core.presentation.ui.ObserveAsEvents
 import com.jesushz.dogdirectory.dog.data.models.Dog
 import com.jesushz.dogdirectory.dog.presentation.dog_list.components.DogListItem
 import org.koin.androidx.compose.koinViewModel
@@ -31,6 +34,20 @@ fun DogListScreenRoot(
     viewModel: DogListViewModel = koinViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    val context = LocalContext.current
+    ObserveAsEvents(
+        flow = viewModel.event
+    ) { event ->
+        when (event) {
+            is DogListEvent.OnError -> {
+                Toast.makeText(
+                    context,
+                    event.error.asString(context),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+    }
     DogListScreen(
         state = state,
     )

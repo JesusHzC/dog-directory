@@ -1,8 +1,10 @@
 package com.jesushz.dogdirectory.dog.di
 
+import com.jesushz.dogdirectory.dog.data.database.RoomLocalDogDataSource
 import com.jesushz.dogdirectory.dog.data.network.KtorRemoteDogDataSource
-import com.jesushz.dogdirectory.dog.data.network.RemoteDogDataSource
+import com.jesushz.dogdirectory.dog.domain.network.RemoteDogDataSource
 import com.jesushz.dogdirectory.dog.data.repository.DefaultDogRepository
+import com.jesushz.dogdirectory.dog.domain.local.LocalDogDataSource
 import com.jesushz.dogdirectory.dog.domain.repository.DogRepository
 import com.jesushz.dogdirectory.dog.presentation.dog_list.DogListViewModel
 import org.koin.core.module.dsl.singleOf
@@ -15,4 +17,6 @@ val dogModule = module {
     singleOf(::DefaultDogRepository).bind<DogRepository>()
 
     viewModelOf(::DogListViewModel)
+
+    singleOf(::RoomLocalDogDataSource).bind<LocalDogDataSource>()
 }

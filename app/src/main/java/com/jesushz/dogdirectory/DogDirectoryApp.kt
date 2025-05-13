@@ -1,6 +1,7 @@
 package com.jesushz.dogdirectory
 
 import android.app.Application
+import com.jesushz.dogdirectory.core.database.di.databaseModule
 import com.jesushz.dogdirectory.core.di.coreModule
 import com.jesushz.dogdirectory.dog.di.dogModule
 import org.koin.android.ext.koin.androidContext
@@ -22,7 +23,8 @@ class DogDirectoryApp: Application() {
             androidContext(this@DogDirectoryApp)
             modules(
                 coreModule,
-                dogModule
+                dogModule,
+                databaseModule
             )
         }
     }

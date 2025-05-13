@@ -4,15 +4,19 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jesushz.dogdirectory.core.domain.onError
 import com.jesushz.dogdirectory.core.domain.onSuccess
+import com.jesushz.dogdirectory.core.presentation.ui.asUiText
 import com.jesushz.dogdirectory.dog.data.models.Dog
 import com.jesushz.dogdirectory.dog.domain.repository.DogRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import timber.log.Timber
+import kotlinx.coroutines.withContext
 
 class DogListViewModel(
     private val repository: DogRepository
@@ -33,8 +37,11 @@ class DogListViewModel(
             initialValue = _state.value
         )
 
+    private val _event = Channel<DogListEvent>()
+    val event = _event.receiveAsFlow()
+
     private fun fetchDogs() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             repository
                 .getDogs()
                 .onSuccess { result ->
@@ -47,11 +54,13 @@ class DogListViewModel(
                     }
                 }
                 .onError { error ->
-                    Timber.e("$error")
                     _state.update {
                         it.copy(
                             isLoading = false
                         )
+                    }
+                    withContext(Dispatchers.Main) {
+                        _event.send(DogListEvent.OnError(error.asUiText()))
                     }
                 }
         }

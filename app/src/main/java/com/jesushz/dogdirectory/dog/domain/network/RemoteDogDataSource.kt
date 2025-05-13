@@ -1,4 +1,4 @@
-package com.jesushz.dogdirectory.dog.data.network
+package com.jesushz.dogdirectory.dog.domain.network
 
 import com.jesushz.dogdirectory.core.domain.DataError
 import com.jesushz.dogdirectory.core.domain.Result

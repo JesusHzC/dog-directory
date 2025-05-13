@@ -4,6 +4,7 @@ import com.jesushz.dogdirectory.core.data.network.safeCall
 import com.jesushz.dogdirectory.core.domain.DataError
 import com.jesushz.dogdirectory.core.domain.Result
 import com.jesushz.dogdirectory.dog.data.models.Dog
+import com.jesushz.dogdirectory.dog.domain.network.RemoteDogDataSource
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 
