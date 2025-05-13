@@ -1,6 +1,7 @@
 package com.jesushz.dogdirectory.dog.presentation.dog_list
 
 import android.widget.Toast
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,6 +14,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -26,15 +30,26 @@ import com.jesushz.dogdirectory.core.presentation.designsystem.components.DogDir
 import com.jesushz.dogdirectory.core.presentation.designsystem.theme.DogDirectoryTheme
 import com.jesushz.dogdirectory.core.presentation.ui.ObserveAsEvents
 import com.jesushz.dogdirectory.core.data.models.Dog
+import com.jesushz.dogdirectory.core.presentation.designsystem.components.DialogExit
 import com.jesushz.dogdirectory.dog.presentation.dog_list.components.DogListItem
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun DogListScreenRoot(
     viewModel: DogListViewModel = koinViewModel(),
+    onExit: () -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val context = LocalContext.current
+    var showExitDialog by remember { mutableStateOf(false) }
+
+    DialogExit(
+        showDialog = showExitDialog,
+        onDismiss = { showExitDialog = false },
+        onConfirm = {
+            onExit()
+        }
+    )
     ObserveAsEvents(
         flow = viewModel.event
     ) { event ->
@@ -50,16 +65,29 @@ fun DogListScreenRoot(
     }
     DogListScreen(
         state = state,
+        onAction = { action ->
+            when (action) {
+                DogListAction.OnBackClick -> {
+                    showExitDialog = true
+                }
+            }
+        }
     )
 }
 
 @Composable
 private fun DogListScreen(
-    state: DogListState
+    state: DogListState,
+    onAction: (DogListAction) -> Unit
 ) {
+    BackHandler {
+        onAction(DogListAction.OnBackClick)
+    }
     DogDirectoryScaffold(
         title = stringResource(R.string.dogs_we_love),
-        onBackClick = {}
+        onBackClick = {
+            onAction(DogListAction.OnBackClick)
+        }
     ) { innerPadding ->
         Box(
             modifier = Modifier
@@ -120,7 +148,8 @@ private fun DogListScreenPreview() {
         DogListScreen(
             state = DogListState(
                 isLoading = false
-            )
+            ),
+            onAction = {}
         )
     }
 }

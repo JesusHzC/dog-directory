@@ -83,5 +83,6 @@ dependencies {
     implementation(libs.timber)
     implementation(libs.coil)
     implementation(libs.coil.network)
+    implementation(libs.androidx.activity)
 
 }

@@ -1,5 +1,6 @@
 package com.jesushz.dogdirectory
 
+import androidx.activity.compose.LocalActivity
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -29,7 +30,12 @@ private fun NavGraphBuilder.dogsGraph(
         startDestination = Routes.DogListScreen
     ) {
         composable<Routes.DogListScreen> {
-            DogListScreenRoot()
+            val activity = LocalActivity.current
+            DogListScreenRoot(
+                onExit = {
+                    activity?.finish()
+                }
+            )
         }
     }
 }
