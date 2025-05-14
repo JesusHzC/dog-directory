@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.serialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
+    alias(libs.plugins.junit5)
 }
 
 android {
@@ -57,13 +58,6 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
 
     implementation(libs.androidx.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
@@ -84,5 +78,14 @@ dependencies {
     implementation(libs.coil)
     implementation(libs.coil.network)
     implementation(libs.androidx.activity)
+    testImplementation(libs.junit5.api)
+    testRuntimeOnly(libs.junit5.engine)
+    testImplementation(libs.junit5.params)
+    testImplementation(libs.junit5.android.test.compose)
+    testImplementation(libs.mockk)
+    testImplementation(libs.assertk)
+    testImplementation(libs.ktor.client.mock)
+    testImplementation(libs.turbine)
+    testImplementation(libs.coroutines.test)
 
 }
