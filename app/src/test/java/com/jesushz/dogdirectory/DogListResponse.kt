@@ -1,4 +1,4 @@
-package com.jesushz.dogdirectory.dog.presentation.dog_list
+package com.jesushz.dogdirectory
 
 import com.jesushz.dogdirectory.core.data.models.Dog
 

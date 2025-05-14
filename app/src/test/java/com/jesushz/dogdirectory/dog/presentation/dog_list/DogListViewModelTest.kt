@@ -10,6 +10,7 @@ import com.jesushz.dogdirectory.TestMockEngine
 import com.jesushz.dogdirectory.core.data.network.HttpClientFactory
 import com.jesushz.dogdirectory.dog.data.network.KtorRemoteDogDataSource
 import com.jesushz.dogdirectory.dog.data.repository.DefaultDogRepository
+import com.jesushz.dogdirectory.dogListResponseRemoteStub
 import io.ktor.client.engine.mock.MockEngineConfig
 import io.ktor.client.engine.mock.respond
 import io.ktor.http.HttpStatusCode
