@@ -68,6 +68,7 @@ dependencies {
     implementation(libs.koin.core)
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
+    debugImplementation(libs.ui.tooling)
     ksp(libs.androidx.room.compiler)
     implementation(libs.ktor.client.cio)
     implementation(libs.ktor.client.content.negotiation)
