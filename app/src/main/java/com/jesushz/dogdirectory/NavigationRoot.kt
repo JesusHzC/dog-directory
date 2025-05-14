@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.jesushz.dogdirectory.core.util.Routes
+import com.jesushz.dogdirectory.dog.presentation.dog_detail.DogDetailScreenRoot
 import com.jesushz.dogdirectory.dog.presentation.dog_list.DogListScreenRoot
 
 @Composable
@@ -32,8 +33,26 @@ private fun NavGraphBuilder.dogsGraph(
         composable<Routes.DogListScreen> {
             val activity = LocalActivity.current
             DogListScreenRoot(
+                onNavigateToDogDetail = { dog ->
+                    navController.navigate(
+                        Routes.DogDetailScreen(
+                            name = dog.name,
+                            description = dog.description,
+                            image = dog.image,
+                            age = dog.age
+                        )
+                    )
+                },
                 onExit = {
                     activity?.finish()
+                }
+            )
+        }
+
+        composable<Routes.DogDetailScreen> {
+            DogDetailScreenRoot(
+                onNavigateUp = {
+                    navController.navigateUp()
                 }
             )
         }

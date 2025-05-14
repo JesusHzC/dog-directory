@@ -2,6 +2,7 @@ package com.jesushz.dogdirectory.dog.presentation.dog_list
 
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -37,6 +38,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun DogListScreenRoot(
     viewModel: DogListViewModel = koinViewModel(),
+    onNavigateToDogDetail: (Dog) -> Unit,
     onExit: () -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -69,6 +71,9 @@ fun DogListScreenRoot(
             when (action) {
                 DogListAction.OnBackClick -> {
                     showExitDialog = true
+                }
+                is DogListAction.OnDogClick -> {
+                    onNavigateToDogDetail(action.dog)
                 }
             }
         }
@@ -111,7 +116,10 @@ private fun DogListScreen(
                     DogList(
                         dogs = state.dogs,
                         modifier = Modifier
-                            .fillMaxSize()
+                            .fillMaxSize(),
+                        onDogClick = { dog ->
+                            onAction(DogListAction.OnDogClick(dog))
+                        }
                     )
                 }
             }
@@ -122,7 +130,8 @@ private fun DogListScreen(
 @Composable
 private fun DogList(
     modifier: Modifier = Modifier,
-    dogs: List<Dog>
+    dogs: List<Dog>,
+    onDogClick: (Dog) -> Unit
 ) {
     LazyColumn(
         modifier = modifier,
@@ -136,6 +145,9 @@ private fun DogList(
                 dog = dog,
                 modifier = Modifier
                     .fillMaxWidth()
+                    .clickable {
+                        onDogClick(dog)
+                    }
             )
         }
     }
